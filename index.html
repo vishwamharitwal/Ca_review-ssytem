@@ -75,11 +75,30 @@
         </div>
     </div>
 
-    <!-- Copy Notification Toast (No Emojis, Mobile Optimized) -->
-    <div id="copy-toast" class="copy-toast">
-        <div class="toast-content">
-            <i class="fa-solid fa-circle-check toast-icon"></i>
-            <p class="toast-message">Review Copy Ho Gaya! Bas Google par jaakar Paste kar dein</p>
+    <!-- Instruction / Success Modal Popup (No Emojis, Mobile Optimized) -->
+    <div id="review-modal" class="review-modal-overlay">
+        <div class="review-modal-card">
+            <div class="modal-icon-wrap">
+                <i class="fa-solid fa-copy"></i>
+            </div>
+            <h3 class="modal-title">Review Copy Ho Gaya!</h3>
+            <p class="modal-subtitle">Aapka review message copy ho chuka hai. Ab bas 2 simple steps karein:</p>
+            
+            <div class="modal-steps">
+                <div class="modal-step-item">
+                    <span class="step-badge">1</span>
+                    <p>Neeche diye gaye <b>OK</b> button par tap karein</p>
+                </div>
+                <div class="modal-step-item">
+                    <span class="step-badge">2</span>
+                    <p>Google par jaakar review box mein <b>Paste</b> kar dein</p>
+                </div>
+            </div>
+
+            <button id="modal-ok-btn" class="modal-ok-btn">
+                <span>OK, Google Par Jayein</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
         </div>
     </div>
 

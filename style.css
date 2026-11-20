@@ -319,49 +319,147 @@ h2 {
     margin-top: 1rem;
 }
 
-/* Copy Notification Toast */
-.copy-toast {
+/* Review Modal Overlay */
+.review-modal-overlay {
     position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translate(-50%, -100px);
-    background: #10B981;
-    color: #FFFFFF;
-    padding: 0.9rem 1.25rem;
-    border-radius: 14px;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
-    z-index: 10000;
-    width: calc(100% - 2rem);
-    max-width: 440px;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    padding: 1.25rem;
     opacity: 0;
     pointer-events: none;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
-    text-align: center;
+    transition: opacity 0.3s ease;
 }
 
-.copy-toast.show {
+.review-modal-overlay.active {
     opacity: 1;
-    transform: translate(-50%, 0);
+    pointer-events: auto;
 }
 
-.toast-content {
+.review-modal-card {
+    background-color: #171717;
+    border: 1px solid #2e2e2e;
+    border-radius: 24px;
+    padding: 2rem 1.5rem;
+    max-width: 380px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+    transform: scale(0.85);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.review-modal-overlay.active .review-modal-card {
+    transform: scale(1);
+}
+
+.modal-icon-wrap {
+    width: 60px;
+    height: 60px;
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.65rem;
+    margin: 0 auto 1.25rem auto;
 }
 
-.toast-icon {
-    font-size: 1.15rem;
+.modal-icon-wrap i {
+    font-size: 1.6rem;
+    color: #10B981;
+}
+
+.modal-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 0.5rem;
+}
+
+.modal-subtitle {
+    font-size: 0.9rem;
+    color: #A3A3A3;
+    line-height: 1.4;
+    margin-bottom: 1.25rem;
+}
+
+.modal-steps {
+    background: #0A0A0A;
+    border: 1px solid #262626;
+    border-radius: 14px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    text-align: left;
+}
+
+.modal-step-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.step-badge {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #262626;
+    color: #10B981;
+    font-size: 0.85rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
 }
 
-.toast-message {
-    font-size: 0.92rem;
-    font-weight: 600;
-    line-height: 1.4;
-    color: #FFFFFF;
+.modal-step-item p {
+    font-size: 0.88rem;
+    color: #D4D4D4;
+    line-height: 1.35;
     margin: 0;
+}
+
+.modal-step-item p b {
+    color: #10B981;
+    font-weight: 600;
+}
+
+.modal-ok-btn {
+    width: 100%;
+    background-color: #10B981;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 14px;
+    padding: 1rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
+}
+
+.modal-ok-btn:hover {
+    background-color: #059669;
+}
+
+.modal-ok-btn:active {
+    transform: scale(0.98);
 }
 
 /* Mobile Responsive Optimizations */
@@ -424,15 +522,17 @@ h2 {
         border-radius: 14px;
     }
 
-    .copy-toast {
-        top: 14px;
-        width: calc(100% - 1.5rem);
-        padding: 0.8rem 1rem;
-        border-radius: 12px;
+    .review-modal-card {
+        padding: 1.75rem 1.25rem;
+        border-radius: 20px;
     }
 
-    .toast-message {
-        font-size: 0.85rem;
-        line-height: 1.35;
+    .modal-title {
+        font-size: 1.25rem;
+    }
+
+    .modal-ok-btn {
+        padding: 0.9rem;
+        font-size: 1rem;
     }
 }

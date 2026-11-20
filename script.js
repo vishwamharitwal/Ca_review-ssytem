@@ -113,13 +113,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const commentsData = {
         5: [
-            "G R A M And Associates LLP ke sath taxation aur ITR filing ka experience behad smooth raha. Team bohot professional aur knowledgeable hai! 👍",
+            "G R A M And Associates LLP ke sath taxation aur ITR filing ka experience behad smooth raha. Team bohot professional aur knowledgeable hai.",
             "Audit and corporate compliance services ke liye top-notch CA firm. Timely guidance aur clear explanations ke liye highly recommended.",
             "Hamari company ki GST compliances aur financial advisory kaafi efficiently handle karte hain. Always reliable and responsive.",
             "Tax planning aur startup advisory mein bohot acche insights mile. G R A M And Associates LLP ka approach bohot systematic aur transparent hai.",
-            "Professional, honest aur accurate service. RoC compliances aur annual filings time se pehle complete kar di. Excellent support! ⭐",
+            "Professional, honest aur accurate service. RoC compliances aur annual filings time se pehle complete kar di. Excellent support.",
             "One of the most trusted Chartered Accountant firms. Quick responses, expert advice, aur smooth documentation process.",
-            "Bohot hi cooperative staff aur expert partners. Financial queries ko easily solve kar diya. Truly five-star service!"
+            "Bohot hi cooperative staff aur expert partners. Financial queries ko easily solve kar diya. Truly five-star service."
         ],
         4: [
             "G R A M And Associates LLP se tax advisory li, overall process bohot smooth aur fast tha. Good service.",
@@ -261,6 +261,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // Modal Logic
+    const reviewModal = document.getElementById('review-modal');
+    const modalOkBtn = document.getElementById('modal-ok-btn');
+
+    if (modalOkBtn) {
+        modalOkBtn.addEventListener('click', () => {
+            window.location.href = GOOGLE_REVIEW_URL;
+        });
+    }
+
     submitBtn.addEventListener('click', () => {
         if (submitBtn.disabled) return;
 
@@ -272,33 +282,16 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             // Copy to clipboard for Google Review
             navigator.clipboard.writeText(selectedMessage).then(() => {
-                // Show notification toast
-                const toast = document.getElementById('copy-toast');
-                if (toast) {
-                    toast.classList.add('show');
+                // Open instruction modal
+                if (reviewModal) {
+                    reviewModal.classList.add('active');
                 }
-
-                // Button animation feedback (No emojis)
-                const originalText = submitBtn.innerHTML;
-                submitBtn.innerHTML = `<span>Review Copy Ho Gaya! Redirecting...</span> <i class="fa-solid fa-check"></i>`;
-                submitBtn.style.backgroundColor = "#10B981"; // Success green
-
-                gsap.fromTo(submitBtn,
-                    { scale: 0.96 },
-                    { scale: 1, duration: 0.3, ease: "back.out(2)" }
-                );
-
-                // Redirect after 2 seconds to let user read the message
-                setTimeout(() => {
-                    window.location.href = GOOGLE_REVIEW_URL;
-                    if (toast) toast.classList.remove('show');
-                    // Reset button
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.style.backgroundColor = "";
-                }, 2000);
             }).catch(err => {
                 console.error('Failed to copy text: ', err);
-                alert("Could not copy message. Please try again.");
+                // Open modal even if clipboard write had permission issues
+                if (reviewModal) {
+                    reviewModal.classList.add('active');
+                }
             });
         }
     });
