@@ -319,6 +319,51 @@ h2 {
     margin-top: 1rem;
 }
 
+/* Copy Notification Toast */
+.copy-toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translate(-50%, -100px);
+    background: #10B981;
+    color: #FFFFFF;
+    padding: 0.9rem 1.25rem;
+    border-radius: 14px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+    z-index: 10000;
+    width: calc(100% - 2rem);
+    max-width: 440px;
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    text-align: center;
+}
+
+.copy-toast.show {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+.toast-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+}
+
+.toast-icon {
+    font-size: 1.15rem;
+    flex-shrink: 0;
+}
+
+.toast-message {
+    font-size: 0.92rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: #FFFFFF;
+    margin: 0;
+}
+
 /* Mobile Responsive Optimizations */
 @media (max-width: 480px) {
     body {
@@ -377,5 +422,17 @@ h2 {
         padding: 0.85rem;
         font-size: 1rem;
         border-radius: 14px;
+    }
+
+    .copy-toast {
+        top: 14px;
+        width: calc(100% - 1.5rem);
+        padding: 0.8rem 1rem;
+        border-radius: 12px;
+    }
+
+    .toast-message {
+        font-size: 0.85rem;
+        line-height: 1.35;
     }
 }

@@ -272,23 +272,30 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             // Copy to clipboard for Google Review
             navigator.clipboard.writeText(selectedMessage).then(() => {
-                // Button animation feedback
+                // Show notification toast
+                const toast = document.getElementById('copy-toast');
+                if (toast) {
+                    toast.classList.add('show');
+                }
+
+                // Button animation feedback (No emojis)
                 const originalText = submitBtn.innerHTML;
-                submitBtn.innerHTML = `<span>Copied! Redirecting...</span> <i class="fa-solid fa-check"></i>`;
+                submitBtn.innerHTML = `<span>Review Copy Ho Gaya! Redirecting...</span> <i class="fa-solid fa-check"></i>`;
                 submitBtn.style.backgroundColor = "#10B981"; // Success green
 
                 gsap.fromTo(submitBtn,
-                    { scale: 0.95 },
+                    { scale: 0.96 },
                     { scale: 1, duration: 0.3, ease: "back.out(2)" }
                 );
 
-                // Redirect after short delay
+                // Redirect after 2 seconds to let user read the message
                 setTimeout(() => {
                     window.location.href = GOOGLE_REVIEW_URL;
+                    if (toast) toast.classList.remove('show');
                     // Reset button
                     submitBtn.innerHTML = originalText;
                     submitBtn.style.backgroundColor = "";
-                }, 1500);
+                }, 2000);
             }).catch(err => {
                 console.error('Failed to copy text: ', err);
                 alert("Could not copy message. Please try again.");
