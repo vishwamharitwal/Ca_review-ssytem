@@ -113,45 +113,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const commentsData = {
         5: [
-            "Fixa Menswear Kalwar Puliya mein bahut acha experience raha. Suit stitching perfect thi bahut khush hoon 😊",
-            "Jaipur mein achha tailor dhoondh raha tha, Kalwar Puliya mein Fixa Menswear mil gaya aur quality dekh ke impress ho gaya.",
-            "Readymade collection dekh ke impress ho gaya, quality top class hai. Kalwar Road se paas mein itna acha showroom hai pata hi nahi tha 👍",
-            "Wedding ke liye suit dhoondh rahe the, dost ne Fixa Menswear ka naam bataya Kalwar Puliya mein. Bahut acha decision raha wahan jaana.",
-            "Jhotwara se Kalwar Puliya jaana easy raha aur fabric quality dekh ke maza aa gaya. Staff bhi bahut acha tha.",
-            "Office wear ke liye Kalwar Puliya mein Fixa Menswear se best mila. Staff bahut helpful aur professional the ❤️",
-            "Fabric range dekh ke bahut khush hua, itni variety expect nahi ki thi. Fixa Menswear ko highly recommend karunga."
+            "G R A M And Associates LLP ke sath taxation aur ITR filing ka experience behad smooth raha. Team bohot professional aur knowledgeable hai! 👍",
+            "Audit and corporate compliance services ke liye top-notch CA firm. Timely guidance aur clear explanations ke liye highly recommended.",
+            "Hamari company ki GST compliances aur financial advisory kaafi efficiently handle karte hain. Always reliable and responsive.",
+            "Tax planning aur startup advisory mein bohot acche insights mile. G R A M And Associates LLP ka approach bohot systematic aur transparent hai.",
+            "Professional, honest aur accurate service. RoC compliances aur annual filings time se pehle complete kar di. Excellent support! ⭐",
+            "One of the most trusted Chartered Accountant firms. Quick responses, expert advice, aur smooth documentation process.",
+            "Bohot hi cooperative staff aur expert partners. Financial queries ko easily solve kar diya. Truly five-star service!"
         ],
         4: [
-            "Drive karte waqt Kalwar Puliya mein ye showroom dikha toh andar ruk gaya. Suit stitch karwaya, quality achhi thi.",
-            "Jaipur mein formal shirt stitch karwani thi, Kalwar Puliya mein Fixa Menswear se karwayi aur fitting achhi aayi 👍",
-            "Readymade shirts liye the yahan se, quality achhi lagi aur Kalwar Road se aana bhi easy tha.",
-            "Kalwar Puliya mein naya showroom khula hai, try kiya toh achha laga. Jhotwara wale dosto ko bhi bata diya 😊",
-            "Office ke liye kapde silwane the, Kalwar Puliya wale Fixa Menswear se kaam badhiya hua aur price bhi reasonable laga.",
-            "Fixa Menswear mein gaya tha, staff ka behavior bahut achha tha. Kalwar Puliya mein easily mil jaata hai.",
-            "Fabric achha dikhaya gaya aur stitching bhi neat thi. Jhotwara se paas mein Kalwar Puliya ke is showroom se achha option nahi milega."
+            "G R A M And Associates LLP se tax advisory li, overall process bohot smooth aur fast tha. Good service.",
+            "GST return filing aur documentation time par finalize hua. Staff helpful aur responsive hai.",
+            "Company compliances ke liye acchi guidance mili. Transparent process and professional approach.",
+            "Tax filing aur queries ko acche se explain kiya. Hamare business ke liye reliable advisory firm hai.",
+            "Smooth experience and quick turnaround on financial queries. Satisfied with their professional support."
         ],
         3: [
-            "Fixa Menswear gaya tha Kalwar Puliya mein theek laga overall. Suit stitch karwaya tha kaam ho gaya time pe.",
-            "Kapde dekhne gaya tha yahan collection normal hai. Kalwar Road se paas hi hai toh nearby wale try kar sakte hain.",
-            "Formal shirt stitch karwayi thi kaam sahi tha. Jhotwara se Kalwar Puliya aana easy raha.",
-            "Bhai ne bataya tha naya menswear shop khula hai Kalwar Puliya mein gaya toh dekhne. Theek laga overall.",
-            "Jaipur mein fabric dikhwane gaya tha Kalwar Puliya wale Fixa Menswear mein. Kaam ho gaya jo chahiye tha.",
-            "Readymade section dekha tha average collection hai. Kalwar Puliya mein hi mil jaata hai jo chahiye tha.",
-            "Fixa Menswear mein gaya tha office wear ke liye sahi raha. Jhotwara se location easily accessible hai."
+            "Tax consultation ke liye contact kiya tha, work standard aur satisfactory raha.",
+            "ITR filing theek se complete ho gayi, communication decent tha.",
+            "Standard accounting and tax services provided as expected.",
+            "Consultancy experience was fine and professional."
         ],
         2: [
-            "The experience could have been better. I’d like to share my feedback.",
-            "I wasn’t fully satisfied with my experience. May I share my feedback?",
-            "I had a few concerns with my experience. I’d like to share them.",
-            "I’d like to share some feedback about my experience.",
-            "I feel the experience could be improved. I’d appreciate your attention."
+            "I faced a few delays or queries regarding my filings. I would like to discuss this with your team.",
+            "The compliance service could have been smoother. Sharing my direct feedback here.",
+            "I had some concerns regarding my tax/accounting work that need attention.",
+            "Need clarification on my recent service request. Please connect."
         ],
         1: [
-            "I wasn’t satisfied with my experience. I’d like to share my feedback.",
-            "I had some concerns and would like to share my feedback.",
-            "My experience wasn’t as expected. I’d appreciate your attention.",
-            "I’d like to share my concerns respectfully.",
-            "I hope you’ll kindly hear my feedback."
+            "I experienced issues with my service and would appreciate immediate assistance from the senior team.",
+            "Not satisfied with the recent handling of my work. Requesting a callback to resolve this.",
+            "I had concerns regarding my consultation and would like to share feedback directly.",
+            "Need urgent attention on my pending work. Please assist."
         ]
     };
 
@@ -250,9 +243,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const submitBtn = document.getElementById('submit-btn');
 
     // Exact Google Review link provided by user
-    const GOOGLE_REVIEW_URL = "https://g.page/r/CRsA8u_KlJDIEBM/review";
+    const GOOGLE_REVIEW_URL = "https://g.page/r/CbWJIMWUr9btEBM/review";
 
-    const WHATSAPP_NUMBER = "917340021807";
+    const WHATSAPP_NUMBER = "918290911347";
 
     function checkSubmitState() {
         if (currentRating > 0 && selectedMessage !== "") {
