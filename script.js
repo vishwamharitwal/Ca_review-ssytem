@@ -299,15 +299,24 @@ document.addEventListener("DOMContentLoaded", () => {
                         if (reviewModal) {
                             reviewModal.classList.add('active');
                         } else {
-                            window.location.href = GOOGLE_REVIEW_URL;
+                            openGoogleReview();
                         }
                     }).catch(() => {
-                        window.location.href = GOOGLE_REVIEW_URL;
+                        openGoogleReview();
                     });
                 } else {
-                    window.location.href = GOOGLE_REVIEW_URL;
+                    openGoogleReview();
                 }
             });
+        }
+
+        function openGoogleReview() {
+            const a = document.createElement('a');
+            a.href = GOOGLE_REVIEW_URL;
+            a.rel = 'noreferrer noopener';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
         }
 
         // Modal Logic
@@ -316,7 +325,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (modalOkBtn) {
             modalOkBtn.addEventListener('click', () => {
-                window.location.href = GOOGLE_REVIEW_URL;
+                openGoogleReview();
             });
         }
 
