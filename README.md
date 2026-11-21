@@ -1,6 +1,6 @@
-# CA Mehendra Kumar Modi - Review & Feedback System
+# Mahendra Kumar Modi - Review & Feedback System
 
-A streamlined, modern review and feedback redirection system for **CA Mehendra Kumar Modi (Chartered Accountant)**.
+A streamlined, modern review and feedback redirection system for **Mahendra Kumar Modi (Chartered Accountant)**.
 
 ## Features
 - **Smart Feedback Redirection**:
