@@ -111,188 +111,192 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentChipsList = [];
     let selectedMessage = "";
 
-    const commentsData = {
-        5: [
-            "G R A M And Associates LLP ke sath taxation aur ITR filing ka experience behad smooth raha. Team bohot professional aur knowledgeable hai.",
-            "Audit and corporate compliance services ke liye top-notch CA firm. Timely guidance aur clear explanations ke liye highly recommended.",
-            "Hamari company ki GST compliances aur financial advisory kaafi efficiently handle karte hain. Always reliable and responsive.",
-            "Tax planning aur startup advisory mein bohot acche insights mile. G R A M And Associates LLP ka approach bohot systematic aur transparent hai.",
-            "Professional, honest aur accurate service. RoC compliances aur annual filings time se pehle complete kar di. Excellent support.",
-            "One of the most trusted Chartered Accountant firms. Quick responses, expert advice, aur smooth documentation process.",
-            "Bohot hi cooperative staff aur expert partners. Financial queries ko easily solve kar diya. Truly five-star service."
-        ],
-        4: [
-            "G R A M And Associates LLP se tax advisory li, overall process bohot smooth aur fast tha. Good service.",
-            "GST return filing aur documentation time par finalize hua. Staff helpful aur responsive hai.",
-            "Company compliances ke liye acchi guidance mili. Transparent process and professional approach.",
-            "Tax filing aur queries ko acche se explain kiya. Hamare business ke liye reliable advisory firm hai.",
-            "Smooth experience and quick turnaround on financial queries. Satisfied with their professional support."
-        ],
-        3: [
-            "Tax consultation ke liye contact kiya tha, work standard aur satisfactory raha.",
-            "ITR filing theek se complete ho gayi, communication decent tha.",
-            "Standard accounting and tax services provided as expected.",
-            "Consultancy experience was fine and professional."
-        ],
-        2: [
-            "I faced a few delays or queries regarding my filings. I would like to discuss this with your team.",
-            "The compliance service could have been smoother. Sharing my direct feedback here.",
-            "I had some concerns regarding my tax/accounting work that need attention.",
-            "Need clarification on my recent service request. Please connect."
-        ],
-        1: [
-            "I experienced issues with my service and would appreciate immediate assistance from the senior team.",
-            "Not satisfied with the recent handling of my work. Requesting a callback to resolve this.",
-            "I had concerns regarding my consultation and would like to share feedback directly.",
-            "Need urgent attention on my pending work. Please assist."
-        ]
-    };
+        function getPromptsForRating(rating, count = 1) {
+            const pool = (window.ALL_COMMENTS && window.ALL_COMMENTS[rating]) || (typeof ALL_COMMENTS !== 'undefined' ? ALL_COMMENTS[rating] : []) || [];
+            if (!pool.length) return [""];
 
-    function updateCarousel() {
-        if (currentChipsList.length === 0) return;
+            let used = [];
+            try {
+                used = JSON.parse(localStorage.getItem('gram_used_reviews') || '[]');
+            } catch (e) {
+                used = [];
+            }
 
-        carouselText.value = currentChipsList[currentMessageIndex];
-        selectedMessage = carouselText.value.trim();
+            let available = pool.filter(msg => !used.includes(msg));
+            if (available.length < count) {
+                available = [...pool];
+                try {
+                    localStorage.setItem('gram_used_reviews', JSON.stringify([]));
+                } catch (e) { }
+            }
 
-        if (currentChipsList[currentMessageIndex] === "") {
-            carouselText.placeholder = "Write your review here...";
-        } else {
-            carouselText.placeholder = "";
+            // Shuffle
+            const shuffled = [...available];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+
+            // 1 curated comment first, 1 blank card next for custom writing
+            return [...shuffled.slice(0, count), ""];
         }
 
-        // Update dots
-        const dots = carouselDots.querySelectorAll('.dot');
-        dots.forEach((dot, index) => {
-            if (index === currentMessageIndex) {
-                dot.classList.add('active');
+        function markReviewUsed(msg) {
+            if (!msg) return;
+            try {
+                let used = JSON.parse(localStorage.getItem('gram_used_reviews') || '[]');
+                if (!used.includes(msg)) {
+                    used.push(msg);
+                    localStorage.setItem('gram_used_reviews', JSON.stringify(used));
+                }
+            } catch (e) { }
+        }
+
+        function updateCarousel() {
+            if (currentChipsList.length === 0) return;
+
+            carouselText.value = currentChipsList[currentMessageIndex];
+            selectedMessage = carouselText.value.trim();
+
+            if (currentChipsList[currentMessageIndex] === "") {
+                carouselText.placeholder = "Write your review here...";
             } else {
-                dot.classList.remove('active');
+                carouselText.placeholder = "";
+            }
+
+            // Update dots
+            const dots = carouselDots.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                if (index === currentMessageIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+
+            // Update buttons state
+            prevBtn.disabled = currentMessageIndex === 0;
+            nextBtn.disabled = currentMessageIndex === currentChipsList.length - 1;
+
+            checkSubmitState();
+        }
+
+        // Allow typing in the textarea
+        carouselText.addEventListener('input', () => {
+            selectedMessage = carouselText.value.trim();
+            currentChipsList[currentMessageIndex] = carouselText.value;
+            checkSubmitState();
+        });
+
+        // Focus textarea when card is clicked
+        carouselCard.addEventListener('click', () => {
+            carouselText.focus();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentMessageIndex > 0) {
+                currentMessageIndex--;
+                updateCarousel();
             }
         });
 
-        // Update buttons state
-        prevBtn.disabled = currentMessageIndex === 0;
-        nextBtn.disabled = currentMessageIndex === currentChipsList.length - 1;
+        nextBtn.addEventListener('click', () => {
+            if (currentMessageIndex < currentChipsList.length - 1) {
+                currentMessageIndex++;
+                updateCarousel();
+            }
+        });
 
-        checkSubmitState();
-    }
+        function renderChips(rating) {
+            currentMessageIndex = 0;
+            selectedMessage = "";
+            checkSubmitState();
 
-    // Allow typing in the textarea
-    carouselText.addEventListener('input', () => {
-        selectedMessage = carouselText.value.trim();
-        currentChipsList[currentMessageIndex] = carouselText.value;
-        checkSubmitState();
-    });
+            if (rating === 0) {
+                carouselText.value = "";
+                carouselText.placeholder = "Please select a star rating first";
+                carouselControls.style.display = "none";
+                return;
+            }
 
-    // Focus textarea when card is clicked
-    carouselCard.addEventListener('click', () => {
-        carouselText.focus();
-    });
+            currentChipsList = getPromptsForRating(rating, 1);
 
-    prevBtn.addEventListener('click', () => {
-        if (currentMessageIndex > 0) {
-            currentMessageIndex--;
-            updateCarousel();
-        }
-    });
+            if (currentChipsList.length > 0) {
+                carouselControls.style.display = "flex";
+                carouselText.placeholder = "Write your review here...";
 
-    nextBtn.addEventListener('click', () => {
-        if (currentMessageIndex < currentChipsList.length - 1) {
-            currentMessageIndex++;
-            updateCarousel();
-        }
-    });
+                // Create dots
+                carouselDots.innerHTML = '';
+                currentChipsList.forEach((_, index) => {
+                    const dot = document.createElement('div');
+                    dot.className = 'dot';
+                    if (index === 0) dot.classList.add('active');
+                    carouselDots.appendChild(dot);
+                });
 
-    function renderChips(rating) {
-        currentMessageIndex = 0;
-        selectedMessage = "";
-        checkSubmitState();
-
-        if (rating === 0) {
-            carouselText.value = "";
-            carouselText.placeholder = "Please select a star rating first";
-            carouselControls.style.display = "none";
-            return;
-        }
-
-        const baseList = commentsData[rating] || [];
-        currentChipsList = ["", ...baseList];
-
-        if (currentChipsList.length > 0) {
-            carouselControls.style.display = "flex";
-            carouselText.placeholder = "Write your review here...";
-
-            // Create dots
-            carouselDots.innerHTML = '';
-            currentChipsList.forEach((_, index) => {
-                const dot = document.createElement('div');
-                dot.className = 'dot';
-                if (index === 0) dot.classList.add('active');
-                carouselDots.appendChild(dot);
-            });
-
-            updateCarousel();
-        } else {
-            carouselControls.style.display = "none";
-            carouselText.value = "";
-            carouselText.placeholder = "No messages available";
-        }
-    }
-
-    // Submit Logic
-    const submitBtn = document.getElementById('submit-btn');
-
-    // Exact Google Review link provided by user
-    const GOOGLE_REVIEW_URL = "https://g.page/r/CbWJIMWUr9btEBM/review";
-
-    const WHATSAPP_NUMBER = "918290911347";
-
-    function checkSubmitState() {
-        if (currentRating > 0 && selectedMessage !== "") {
-            submitBtn.removeAttribute('disabled');
-            if (currentRating <= 2) {
-                submitBtn.innerHTML = '<i class="fa-brands fa-whatsapp"></i> Share Feedback';
+                updateCarousel();
             } else {
+                carouselControls.style.display = "none";
+                carouselText.value = "";
+                carouselText.placeholder = "No messages available";
+            }
+        }
+
+        // Submit Logic
+        const submitBtn = document.getElementById('submit-btn');
+
+        // Exact Google Review link provided by user
+        const GOOGLE_REVIEW_URL = "https://g.page/r/CbWJIMWUr9btEBM/review";
+
+        const WHATSAPP_NUMBER = "918290911347";
+
+        function checkSubmitState() {
+            if (currentRating > 0 && selectedMessage !== "") {
+                submitBtn.removeAttribute('disabled');
+                if (currentRating <= 2) {
+                    submitBtn.innerHTML = '<i class="fa-brands fa-whatsapp"></i> Share Feedback';
+                } else {
+                    submitBtn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy & Post on Google';
+                }
+            } else {
+                submitBtn.setAttribute('disabled', 'true');
                 submitBtn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy & Post on Google';
             }
-        } else {
-            submitBtn.setAttribute('disabled', 'true');
-            submitBtn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy & Post on Google';
         }
-    }
 
-    // Modal Logic
-    const reviewModal = document.getElementById('review-modal');
-    const modalOkBtn = document.getElementById('modal-ok-btn');
+        // Modal Logic
+        const reviewModal = document.getElementById('review-modal');
+        const modalOkBtn = document.getElementById('modal-ok-btn');
 
-    if (modalOkBtn) {
-        modalOkBtn.addEventListener('click', () => {
-            window.location.href = GOOGLE_REVIEW_URL;
-        });
-    }
-
-    submitBtn.addEventListener('click', () => {
-        if (submitBtn.disabled) return;
-
-        if (currentRating <= 2) {
-            // WhatsApp Redirection
-            let message = selectedMessage;
-            let whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-            window.location.href = whatsappUrl;
-        } else {
-            // Copy to clipboard for Google Review
-            navigator.clipboard.writeText(selectedMessage).then(() => {
-                // Open instruction modal
-                if (reviewModal) {
-                    reviewModal.classList.add('active');
-                }
-            }).catch(err => {
-                console.error('Failed to copy text: ', err);
-                // Open modal even if clipboard write had permission issues
-                if (reviewModal) {
-                    reviewModal.classList.add('active');
-                }
+        if (modalOkBtn) {
+            modalOkBtn.addEventListener('click', () => {
+                window.location.href = GOOGLE_REVIEW_URL;
             });
         }
+
+        submitBtn.addEventListener('click', () => {
+            if (submitBtn.disabled) return;
+            markReviewUsed(selectedMessage);
+
+            if (currentRating <= 2) {
+                // WhatsApp Redirection
+                let message = selectedMessage;
+                let whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+                window.location.href = whatsappUrl;
+            } else {
+                // Copy to clipboard for Google Review
+                navigator.clipboard.writeText(selectedMessage).then(() => {
+                    // Open instruction modal
+                    if (reviewModal) {
+                        reviewModal.classList.add('active');
+                    }
+                }).catch(err => {
+                    console.error('Failed to copy text: ', err);
+                    // Open modal even if clipboard write had permission issues
+                    if (reviewModal) {
+                        reviewModal.classList.add('active');
+                    }
+                });
+            }
+        });
     });
-});
