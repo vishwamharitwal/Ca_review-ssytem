@@ -21,9 +21,9 @@ def generate_permanent_qr(url: str, output_filename: str):
 
 if __name__ == "__main__":
     # 1. Review Filter Web App URL (GitHub Pages)
-    web_url = "https://vishwamharitwal.github.io/gram_review_system/"
+    web_url = "https://vishwamharitwal.github.io/Ca_review-ssytem/"
     generate_permanent_qr(web_url, "qr_code_review_system.png")
 
     # 2. Direct Google Review URL
-    google_url = "https://g.page/r/CbWJIMWUr9btEBM/review"
+    google_url = "https://g.page/r/Cf6e_7alQpUbEBM/review"
     generate_permanent_qr(google_url, "qr_code_google_direct.png")

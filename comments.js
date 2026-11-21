@@ -1,74 +1,64 @@
 const REVIEW_PARTS = {
     5: {
         openings: [
-            "ITR filing aur tax planning ka experience bohot smooth raha.",
-            "Best CA firm for company compliances and GST return filing.",
-            "Meri capital gains tax return bina kisi hassle ke file kar di.",
-            "Very professional team with deep knowledge of tax laws.",
-            "Hamari company ke GST aur ROC compliances hamesha time par handle karte hain.",
-            "Super fast and hassle-free tax consultation experience.",
-            "Startup registration aur legal advisory ke liye best Chartered Accountants.",
-            "Income tax scrutiny notice solve karne mein bohot timely support mila.",
-            "Excellent accounting service and transparent consultation throughout.",
-            "Hamari firm ka annual audit bohot systematically complete kiya.",
-            "Great guidance on NRI taxation and lower deduction certificates.",
-            "Kaafi supportive partners aur transparent fees structure hai.",
-            "Smooth and 100% digital documentation process without office visits.",
-            "TDS quarterly returns aur payroll reconciliation bilkul error-free raha.",
-            "Outstanding service for business tax planning and compliances.",
-            "Ek hi roof ke under taxation aur financial advisory mil gayi.",
-            "Prompt response and accurate calculations on complex salary structures.",
-            "Urgent CA certificate aur net worth documents quickly provide kiye.",
-            "Best tax consultants in terms of speed, clarity, and trust.",
-            "Hamare business accounts ko bohot acche se streamline kar diya.",
-            "Very reliable and client-centric Chartered Accountant firm.",
-            "Time se pehle saare statutory tax compliances complete ho gaye.",
-            "Bohot polite staff aur practical financial advice mili.",
-            "Exceptional support during our company incorporation and MCA filings.",
-            "Legitimate tax optimization guidance helped save decent money."
+            "Best CA for all tax and financial matters.",
+            "Best ITR return filing service! Bohot hi smooth aur quick experience raha.",
+            "Truly the best consultants for income tax, ITR return filing, and GST compliances.",
+            "Best CA in town! Super fast and accurate ITR return filing.",
+            "Best consultants for tax planning and financial advisory.",
+            "Best ITR return service, bina kisi hassle ke return time par file ho gaya.",
+            "One of the best CAs, bohot hi professional aur helpful guidance provide ki.",
+            "Best tax consultants! Har deduction dhyan se claim karwayi.",
+            "Best CA for salaried and business ITR returns.",
+            "Accurate calculations and prompt response, best consultants to consult with.",
+            "Best ITR return filing experience with complete transparency.",
+            "Best CA for corporate compliances, tax planning, and audit support.",
+            "Best consultants in terms of speed, trust, and professional advice.",
+            "Meri complex ITR return easily file kar di, truly the best CA.",
+            "Best ITR return filing service, 100% digital and stress-free process.",
+            "Best tax consultants, har query ka clear aur practical solution milta hai.",
+            "Best CA for tax optimization and legal financial advice.",
+            "Timely reminder aur quick submission, best ITR return filing assistance.",
+            "Best consultants for business accounting, GST, and direct taxes.",
+            "Bohot polite nature aur reliable consultation, definitely the best CA.",
+            "Best ITR return service with lowest turnaround time.",
+            "Best financial consultants! Honest consultation without any hidden charges.",
+            "Best CA firm for end-to-end tax solutions and advisory.",
+            "Best ITR return filing guidance, saved good tax legally.",
+            "Excellent expertise in taxation, best CA and best consultants."
         ],
         closings: [
-            "Highly recommended for business and individuals!",
-            "Quick responses aur reliable advice. 5 stars.",
-            "Staff bohot helpful hai. Keep up the good work!",
-            "Truly professional team, completely satisfied.",
-            "Bina kisi jhanjhat ke sab time par ho gaya.",
-            "Always accessible on call and WhatsApp. Must visit.",
-            "Honest consultation aur zero hidden charges. Highly recommended.",
-            "Puri tarah se satisfied hoon. Thank you team!",
-            "Top-notch service and great turnaround time.",
-            "Five star service without any second thought.",
-            "Har query ka clear solution milta hai. Great experience!",
-            "Very cooperative and disciplined professionals.",
-            "Smooth coordination and timely delivery. 10/10.",
+            "Best CA, highly recommended!",
+            "Best ITR return service, 5 stars!",
+            "Best consultants for all tax needs. Must visit!",
+            "Truly professional and reliable. 10/10.",
             "Best experience so far, highly recommended.",
-            "Extremely courteous partners and prompt resolution.",
-            "Bilkul hassle-free service rahi. Thank you!",
-            "Great value for money and dependable support.",
-            "Transparent guidance throughout the process.",
-            "Genuine advice aur quick turnaround. Excellent!",
-            "Sabhi tax queries easily solve ho gayi. Recommended!",
-            "Superb customer service and expert consultation.",
-            "Always ahead of statutory deadlines. Great firm.",
-            "Peace of mind for all accounting needs.",
-            "Clear communication and honest feedback every time.",
-            "One of the finest CA teams to work with."
+            "Quick turnaround time and genuine advice. Five stars!",
+            "Best CA and best tax consultants in town.",
+            "Best ITR return filing support, fully satisfied!",
+            "Clear communication and transparent guidance throughout.",
+            "Top-notch service, thank you sir!",
+            "Five star service without any second thought.",
+            "Very disciplined and client-centric approach.",
+            "Best consultants to work with, completely satisfied.",
+            "Smooth coordination and fast delivery.",
+            "Peace of mind for all tax and accounting needs."
         ]
     },
     4: {
         openings: [
-            "Tax advisory aur return filing ka experience kaafi smooth raha.",
-            "Good professional support received from their accounting team.",
-            "Company compliance work time par finalize hua.",
-            "Decent and helpful consultation regarding business tax.",
-            "Fast turnaround on GST queries and documentation."
+            "Best CA for ITR return filing, overall experience kaafi accha raha.",
+            "Good tax consultants, timely response and professional guidance.",
+            "Best ITR return filing service with good documentation support.",
+            "Helpful consultation regarding business tax and accounting.",
+            "Best CA consultation for personal and business tax filing."
         ],
         closings: [
             "Satisfied with the overall service.",
-            "Good CA firm, would recommend.",
-            "Reliable team for compliance needs.",
+            "Good CA and dependable consultants.",
             "Smooth coordination throughout the process.",
-            "Professional approach and good guidance."
+            "Professional approach and good guidance.",
+            "Reliable team for tax and compliance needs."
         ]
     }
 };
@@ -93,18 +83,18 @@ const ALL_COMMENTS = {
     4: generateDynamicReviews(4, 5),
     3: [
         "Tax consultation standard aur satisfactory rahi.",
-        "ITR filing theek se complete hui, decent communication.",
-        "Standard accounting and tax services provided as expected."
+        "ITR return filing theek se complete hui, decent communication.",
+        "Standard CA and tax consulting services provided."
     ],
     2: [
-        "Delays face kiye filings mein, direct baat karni hai.",
-        "Compliance service could be smoother. Sharing feedback.",
-        "Service request par clarification chahiye, please connect."
+        "Filing status par update chahiye, direct connect karein.",
+        "Consultation service could be smoother. Sharing feedback.",
+        "ITR return query par clarification chahiye, please call back."
     ],
     1: [
         "Service issue solve karwane ke liye senior team se baat karni hai.",
-        "Pending work par urgent callback request hai.",
-        "Consultation query resolve nahi hui, need assistance."
+        "Pending tax work par urgent callback request hai.",
+        "Consultation query resolve nahi hui, urgent assistance needed."
     ]
 };
 

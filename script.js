@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let used = [];
         try {
-            used = JSON.parse(localStorage.getItem('gram_used_reviews') || '[]');
+            used = JSON.parse(localStorage.getItem('ca_modi_used_reviews') || '[]');
         } catch (e) {
             used = [];
         }
@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (available.length < count) {
                 available = [...pool];
                 try {
-                    localStorage.setItem('gram_used_reviews', JSON.stringify([]));
+                    localStorage.setItem('ca_modi_used_reviews', JSON.stringify([]));
                 } catch (e) { }
             }
 
@@ -163,10 +163,10 @@ document.addEventListener("DOMContentLoaded", () => {
         function markReviewUsed(msg) {
             if (!msg) return;
             try {
-                let used = JSON.parse(localStorage.getItem('gram_used_reviews') || '[]');
+                let used = JSON.parse(localStorage.getItem('ca_modi_used_reviews') || '[]');
                 if (!used.includes(msg)) {
                     used.push(msg);
-                    localStorage.setItem('gram_used_reviews', JSON.stringify(used));
+                    localStorage.setItem('ca_modi_used_reviews', JSON.stringify(used));
                 }
             } catch (e) { }
         }
@@ -267,7 +267,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const helperText = document.getElementById('helper-text');
 
         // Exact Google Review link provided by user
-        const GOOGLE_REVIEW_URL = "https://g.page/r/CbWJIMWUr9btEBM/review";
+        const GOOGLE_REVIEW_URL = "https://g.page/r/Cf6e_7alQpUbEBM/review";
 
         const WHATSAPP_NUMBER = "918290911347";
 
