@@ -111,16 +111,34 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentChipsList = [];
     let selectedMessage = "";
 
-        function getPromptsForRating(rating, count = 1) {
+    function getPromptsForRating(rating, count = 1) {
+        if (rating === 0) return [""];
+
+        let used = [];
+        try {
+            used = JSON.parse(localStorage.getItem('gram_used_reviews') || '[]');
+        } catch (e) {
+            used = [];
+        }
+
+        const dynamicEngine = window.generateDynamicReview || (typeof generateDynamicReview !== 'undefined' ? generateDynamicReview : null);
+
+        let selected = [];
+        if (dynamicEngine && (rating === 5 || rating === 4)) {
+            let attempts = 0;
+            while (selected.length < count && attempts < 50) {
+                attempts++;
+                const cand = dynamicEngine(rating);
+                if (!used.includes(cand) && !selected.includes(cand)) {
+                    selected.push(cand);
+                }
+            }
+            if (selected.length < count) {
+                selected.push(dynamicEngine(rating));
+            }
+        } else {
             const pool = (window.ALL_COMMENTS && window.ALL_COMMENTS[rating]) || (typeof ALL_COMMENTS !== 'undefined' ? ALL_COMMENTS[rating] : []) || [];
             if (!pool.length) return [""];
-
-            let used = [];
-            try {
-                used = JSON.parse(localStorage.getItem('gram_used_reviews') || '[]');
-            } catch (e) {
-                used = [];
-            }
 
             let available = pool.filter(msg => !used.includes(msg));
             if (available.length < count) {
@@ -130,16 +148,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 } catch (e) { }
             }
 
-            // Shuffle
             const shuffled = [...available];
             for (let i = shuffled.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
             }
-
-            // 1 curated comment first, 1 blank card next for custom writing
-            return [...shuffled.slice(0, count), ""];
+            selected = shuffled.slice(0, count);
         }
+
+        // 1 curated comment first, 1 blank card next for custom writing
+        return [...selected, ""];
+    }
 
         function markReviewUsed(msg) {
             if (!msg) return;
@@ -244,6 +263,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Submit Logic
         const submitBtn = document.getElementById('submit-btn');
+        const secondaryGoogleLink = document.getElementById('secondary-google-link');
+        const helperText = document.getElementById('helper-text');
 
         // Exact Google Review link provided by user
         const GOOGLE_REVIEW_URL = "https://g.page/r/CbWJIMWUr9btEBM/review";
@@ -253,15 +274,40 @@ document.addEventListener("DOMContentLoaded", () => {
         function checkSubmitState() {
             if (currentRating > 0 && selectedMessage !== "") {
                 submitBtn.removeAttribute('disabled');
-                if (currentRating <= 2) {
-                    submitBtn.innerHTML = '<i class="fa-brands fa-whatsapp"></i> Share Feedback';
-                } else {
-                    submitBtn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy & Post on Google';
-                }
             } else {
                 submitBtn.setAttribute('disabled', 'true');
-                submitBtn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy & Post on Google';
             }
+
+            if (currentRating <= 2 && currentRating > 0) {
+                submitBtn.innerHTML = '<i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp (Instant Support)';
+                if (secondaryGoogleLink) secondaryGoogleLink.style.display = 'inline-block';
+                if (helperText) helperText.textContent = 'Direct senior team se complaint resolve karwayein';
+            } else {
+                submitBtn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy & Post on Google';
+                if (secondaryGoogleLink) secondaryGoogleLink.style.display = 'none';
+                if (helperText) helperText.textContent = 'Review copy ho jayega, bas Google review page par paste kar dein';
+            }
+        }
+
+        // Secondary link: Soft Gating - Allow posting directly to Google if user insists
+        if (secondaryGoogleLink) {
+            secondaryGoogleLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (selectedMessage) {
+                    markReviewUsed(selectedMessage);
+                    navigator.clipboard.writeText(selectedMessage).then(() => {
+                        if (reviewModal) {
+                            reviewModal.classList.add('active');
+                        } else {
+                            window.location.href = GOOGLE_REVIEW_URL;
+                        }
+                    }).catch(() => {
+                        window.location.href = GOOGLE_REVIEW_URL;
+                    });
+                } else {
+                    window.location.href = GOOGLE_REVIEW_URL;
+                }
+            });
         }
 
         // Modal Logic
